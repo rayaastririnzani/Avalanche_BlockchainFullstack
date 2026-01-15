@@ -95,15 +95,15 @@ export default function Page() {
   const isWrongNetwork = chainId !== 43113 && chainId !== 43114;
 
   return (
-    <main className="min-h-screen bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-800 flex items-center justify-center text-white">
-      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_0_40px_rgba(99,102,241,0.2)] p-8 space-y-6">
+    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 flex items-center justify-center text-white px-4">
+      <div className="w-full max-w-md bg-slate-900/90 border border-violet-500/20 rounded-2xl shadow-[0_0_30px_rgba(139,92,246,0.15)] p-6 space-y-6">
 
         {/* HEADER */}
-        <header className="text-center space-y-1">
-          <h1 className="text-3xl font-extrabold tracking-wide">
+        <header className="text-center">
+          <h1 className="text-2xl font-bold tracking-wide text-violet-400">
             Avalanche dApp
           </h1>
-          <p className="text-sm text-white/60">
+          <p className="text-xs text-white/50 mt-1">
             Simple Storage Smart Contract
           </p>
         </header>
@@ -113,23 +113,23 @@ export default function Page() {
           <button
             onClick={() => connect({ connector: injected() })}
             disabled={isConnecting}
-            className="w-full py-3 rounded-xl font-semibold bg-indigo-600 hover:bg-indigo-500 transition disabled:opacity-50"
+            className="w-full py-2.5 rounded-lg bg-violet-600 hover:bg-violet-500 transition font-medium disabled:opacity-50"
           >
             {isConnecting ? 'Connecting...' : 'Connect Wallet'}
           </button>
         ) : (
-          <div className="rounded-xl bg-black/40 border border-white/10 p-4 flex justify-between items-center text-sm">
-            <div className="space-y-1">
-              <p className="text-white/70">
+          <div className="flex items-center justify-between bg-slate-950 border border-violet-500/20 rounded-lg px-4 py-3 text-sm">
+            <div>
+              <p className="font-mono text-violet-400">
                 {shortenAddress(address)}
               </p>
-              <p className="text-xs text-white/50">
+              <p className="text-xs text-white/40">
                 Chain ID: {chainId}
               </p>
             </div>
             <button
               onClick={() => disconnect()}
-              className="px-3 py-1.5 rounded-lg text-xs text-red-400 border border-red-500/40 hover:bg-red-500/20 transition"
+              className="text-xs text-red-400 hover:text-red-300"
             >
               Disconnect
             </button>
@@ -139,14 +139,14 @@ export default function Page() {
         {/* NETWORK WARNING */}
         {isConnected && isWrongNetwork && (
           <p className="text-center text-xs text-red-400">
-            Please switch to Avalanche Fuji or Mainnet
+            Switch to Avalanche Fuji or Mainnet
           </p>
         )}
 
         {/* READ VALUE */}
-        <div className="rounded-xl bg-black/40 border border-white/10 p-4 text-center">
-          <p className="text-xs text-white/50 mb-1">Stored Value</p>
-          <p className="text-2xl font-mono font-bold text-indigo-400">
+        <div className="bg-slate-950 border border-violet-500/20 rounded-lg p-4 text-center">
+          <p className="text-xs text-white/40 mb-1">Stored Value</p>
+          <p className="text-3xl font-mono font-semibold text-violet-400">
             {isLoading ? '...' : value?.toString()}
           </p>
         </div>
@@ -157,30 +157,41 @@ export default function Page() {
             type="number"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Enter new value"
-            className="w-full p-3 rounded-xl bg-black/40 border border-white/10 focus:ring-2 focus:ring-indigo-500 outline-none"
+            placeholder="New value"
+            className="w-full bg-slate-950 border border-violet-500/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
           />
 
           <button
             onClick={handleSetValue}
             disabled={isWriting || isWrongNetwork}
-            className="w-full py-3 rounded-xl font-semibold bg-emerald-600 hover:bg-emerald-500 transition disabled:opacity-50"
+            className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition font-medium disabled:opacity-50"
           >
             {isWriting ? 'Updating...' : 'Set Value'}
           </button>
 
           {txStatus && (
-            <p className="text-xs text-center text-white/60">
+            <p className="text-center text-xs text-white/60">
               {txStatus}
             </p>
           )}
         </div>
 
         {/* FOOTER */}
-        <footer className="pt-4 border-t border-white/10 text-center text-xs text-white/40">
-          <p>Nama: <span className="text-white/70">Raya Astri Rinzani</span></p>
-          <p>NIM: <span className="text-white/70">I231011401930</span></p>
+        <footer className="pt-4 border-t border-violet-500/20 text-center text-xs text-white/40">
+          <p>
+            Nama:{' '}
+            <span className="text-white/70">
+              Raya Astri Rinzani
+            </span>
+          </p>
+          <p>
+            NIM:{' '}
+            <span className="text-white/70">
+              I231011401930
+            </span>
+          </p>
         </footer>
+
       </div>
     </main>
   );
